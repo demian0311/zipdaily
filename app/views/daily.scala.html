@@ -1,0 +1,14 @@
+@(weatherResult: WeatherResult)
+@main(Messages("application.name")) {
+    <h2>Todays weather for @weatherResult.zipcode</h2>
+
+    @weatherResult.weatherDays.map { currWeatherDay =>
+        <h3>@currWeatherDay.name</h3>
+        <ul>
+            <li>high: @currWeatherDay.high</li>
+            <li>low: @currWeatherDay.low</li>
+            <li>precip: @currWeatherDay.chanceOfPrecipitation</li>
+        </ul>
+
+    }
+}
