@@ -1,18 +1,12 @@
 package services
 
 import models.WeatherResult
-import play.api.libs.ws.WS._
-import play.libs.F.Promise
-import scala.concurrent.{Future, Await}
+import scala.concurrent.Await
 import scala.concurrent.duration._
-import play.libs.Json
 import play.api.libs.ws.WS
-
-//import play.libs.F.Promise
 
 class WeatherClient {
   val endpoint = "http://graphical.weather.gov/xml/SOAP_server/ndfdXMLserver.php"
-
 
   def getLatLongFromZipCode(zipcode: String): Option[String] = {
     val xmlContent = <soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ndf="http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl">
@@ -24,22 +18,41 @@ class WeatherClient {
       </soapenv:Body>
     </soapenv:Envelope>
 
-    // begin: from book
-    val query = """paperclip OR "paper clip""""
-    val url = "http://search.twitter.com/search.json"
-    val responseFuture = WS.url(endpoint).post(xmlContent.toString())
+    val responseFuture = WS.url(endpoint).withHeaders(
+      "Content-Type" -> "text/xml;charset=UTF-8",
+      "SOAPAction" -> "http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl#LatLonListZipCode"
+    ).post(xmlContent.toString())
 
     val response = Await.result(responseFuture, 10 seconds)
     println("response.body: " + response.body)
-    // TODO: now actually parse the results and send back
-
-    Some("30.2153,-92.0295")
+    val extr="""latLonList&gt.*&lt;/latLonList&gt""".r
+    extr.findFirstIn(response.body) match {
+      case Some(str) => {
+        val withoutLeft = str.drop(14)
+        val withoutRight = withoutLeft.dropRight(19)
+        Some(withoutRight)
+      }
+      case None => {
+        None
+      }
+    }
   }
 
   def getWeatherForZipcode(zipcode: String): Option[WeatherResult] ={
-    None
-  }
 
+    getLatLongFromZipCode(zipcode) match {
+      case Some(latLong) => {
+        // now do o
+        Some(WeatherResult(
+          zipcode = zipcode,
+          weatherDays = Nil
+        ))
+      }
+      case None => {
+        None
+      }
+    }
+  }
 }
 
 

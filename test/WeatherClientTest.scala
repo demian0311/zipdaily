@@ -6,7 +6,7 @@ class WeatherClientTest {
 
   @Test
   def getLatLongFromZipCode(){
-    val result: Option[String] = weatherClient.getLatLongFromZipCode("70503")
+    val result: Option[String] = weatherClient.getLatLongFromZipCode("61312")
     result match {
       case Some(value) => println("value: " + value)
       case None => println("no value")
