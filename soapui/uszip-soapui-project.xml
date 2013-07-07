@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="uszip" resourceRoot="" soapui-version="4.5.2" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="USZipSoap" type="wsdl" bindingName="{http://www.webserviceX.NET}USZipSoap" soapVersion="1_1" anonymous="optional" definition="http://www.webservicex.net/uszip.asmx?WSDL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>http://www.webservicex.net/uszip.asmx</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://www.webserviceX.NET/GetInfoByAreaCode" name="GetInfoByAreaCode" bindingOperationName="GetInfoByAreaCode" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://www.webservicex.net/uszip.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://www.webserviceX.NET">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:GetInfoByAreaCode>
+         <!--Optional:-->
+         <web:USAreaCode>?</web:USAreaCode>
+      </web:GetInfoByAreaCode>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.webserviceX.NET/GetInfoByAreaCode"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.webserviceX.NET/GetInfoByCity" name="GetInfoByCity" bindingOperationName="GetInfoByCity" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://www.webservicex.net/uszip.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://www.webserviceX.NET">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:GetInfoByCity>
+         <!--Optional:-->
+         <web:USCity>?</web:USCity>
+      </web:GetInfoByCity>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.webserviceX.NET/GetInfoByCity"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.webserviceX.NET/GetInfoByState" name="GetInfoByState" bindingOperationName="GetInfoByState" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://www.webservicex.net/uszip.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://www.webserviceX.NET">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:GetInfoByState>
+         <!--Optional:-->
+         <web:USState>?</web:USState>
+      </web:GetInfoByState>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.webserviceX.NET/GetInfoByState"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.webserviceX.NET/GetInfoByZIP" name="GetInfoByZIP" bindingOperationName="GetInfoByZIP" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://www.webservicex.net/uszip.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://www.webserviceX.NET">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:GetInfoByZIP>
+         <!--Optional:-->
+         <web:USZip>70503</web:USZip>
+      </web:GetInfoByZIP>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.webserviceX.NET/GetInfoByZIP"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="USZipSoap12" type="wsdl" bindingName="{http://www.webserviceX.NET}USZipSoap12" soapVersion="1_2" anonymous="optional" definition="http://www.webservicex.net/uszip.asmx?WSDL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://www.webservicex.net/uszip.asmx?WSDL"><con:part><con:url>http://www.webservicex.net/uszip.asmx?WSDL</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://www.webserviceX.NET" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.webserviceX.NET" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.webserviceX.NET">
+      <s:element name="GetInfoByZIP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="USZip" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInfoByZIPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInfoByZIPResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any/>
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInfoByCity">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="USCity" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInfoByCityResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInfoByCityResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any/>
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInfoByState">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="USState" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInfoByStateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInfoByStateResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any/>
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInfoByAreaCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="USAreaCode" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInfoByAreaCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInfoByAreaCodeResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any/>
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetInfoByZIPSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInfoByZIP"/>
+  </wsdl:message>
+  <wsdl:message name="GetInfoByZIPSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInfoByZIPResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetInfoByCitySoapIn">
+    <wsdl:part name="parameters" element="tns:GetInfoByCity"/>
+  </wsdl:message>
+  <wsdl:message name="GetInfoByCitySoapOut">
+    <wsdl:part name="parameters" element="tns:GetInfoByCityResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetInfoByStateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInfoByState"/>
+  </wsdl:message>
+  <wsdl:message name="GetInfoByStateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInfoByStateResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetInfoByAreaCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInfoByAreaCode"/>
+  </wsdl:message>
+  <wsdl:message name="GetInfoByAreaCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInfoByAreaCodeResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetInfoByZIPHttpGetIn">
+    <wsdl:part name="USZip" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetInfoByZIPHttpGetOut">
+    <wsdl:part name="Body"/>
+  </wsdl:message>
+  <wsdl:message name="GetInfoByCityHttpGetIn">
+    <wsdl:part name="USCity" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetInfoByCityHttpGetOut">
+    <wsdl:part name="Body"/>
+  </wsdl:message>
+  <wsdl:message name="GetInfoByStateHttpGetIn">
+    <wsdl:part name="USState" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetInfoByStateHttpGetOut">
+    <wsdl:part name="Body"/>
+  </wsdl:message>
+  <wsdl:message name="GetInfoByAreaCodeHttpGetIn">
+    <wsdl:part name="USAreaCode" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetInfoByAreaCodeHttpGetOut">
+    <wsdl:part name="Body"/>
+  </wsdl:message>
+  <wsdl:message name="GetInfoByZIPHttpPostIn">
+    <wsdl:part name="USZip" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetInfoByZIPHttpPostOut">
+    <wsdl:part name="Body"/>
+  </wsdl:message>
+  <wsdl:message name="GetInfoByCityHttpPostIn">
+    <wsdl:part name="USCity" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetInfoByCityHttpPostOut">
+    <wsdl:part name="Body"/>
+  </wsdl:message>
+  <wsdl:message name="GetInfoByStateHttpPostIn">
+    <wsdl:part name="USState" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetInfoByStateHttpPostOut">
+    <wsdl:part name="Body"/>
+  </wsdl:message>
+  <wsdl:message name="GetInfoByAreaCodeHttpPostIn">
+    <wsdl:part name="USAreaCode" type="s:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetInfoByAreaCodeHttpPostOut">
+    <wsdl:part name="Body"/>
+  </wsdl:message>
+  <wsdl:portType name="USZipSoap">
+    <wsdl:operation name="GetInfoByZIP">
+      <wsdl:documentation>Get State Code,City,Area Code,Time Zone,Zip Code by Zip Code</wsdl:documentation>
+      <wsdl:input message="tns:GetInfoByZIPSoapIn"/>
+      <wsdl:output message="tns:GetInfoByZIPSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfoByCity">
+      <wsdl:documentation>Get State Code,City,Area Code,Time Zone,Zip Code by City</wsdl:documentation>
+      <wsdl:input message="tns:GetInfoByCitySoapIn"/>
+      <wsdl:output message="tns:GetInfoByCitySoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfoByState">
+      <wsdl:documentation>Get State Code,City,Area Code,Time Zone,Zip Code by state</wsdl:documentation>
+      <wsdl:input message="tns:GetInfoByStateSoapIn"/>
+      <wsdl:output message="tns:GetInfoByStateSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfoByAreaCode">
+      <wsdl:documentation>Get State Code,City,Area Code,Time Zone,Zip Code by Area Code</wsdl:documentation>
+      <wsdl:input message="tns:GetInfoByAreaCodeSoapIn"/>
+      <wsdl:output message="tns:GetInfoByAreaCodeSoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="USZipHttpGet">
+    <wsdl:operation name="GetInfoByZIP">
+      <wsdl:documentation>Get State Code,City,Area Code,Time Zone,Zip Code by Zip Code</wsdl:documentation>
+      <wsdl:input message="tns:GetInfoByZIPHttpGetIn"/>
+      <wsdl:output message="tns:GetInfoByZIPHttpGetOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfoByCity">
+      <wsdl:documentation>Get State Code,City,Area Code,Time Zone,Zip Code by City</wsdl:documentation>
+      <wsdl:input message="tns:GetInfoByCityHttpGetIn"/>
+      <wsdl:output message="tns:GetInfoByCityHttpGetOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfoByState">
+      <wsdl:documentation>Get State Code,City,Area Code,Time Zone,Zip Code by state</wsdl:documentation>
+      <wsdl:input message="tns:GetInfoByStateHttpGetIn"/>
+      <wsdl:output message="tns:GetInfoByStateHttpGetOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfoByAreaCode">
+      <wsdl:documentation>Get State Code,City,Area Code,Time Zone,Zip Code by Area Code</wsdl:documentation>
+      <wsdl:input message="tns:GetInfoByAreaCodeHttpGetIn"/>
+      <wsdl:output message="tns:GetInfoByAreaCodeHttpGetOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="USZipHttpPost">
+    <wsdl:operation name="GetInfoByZIP">
+      <wsdl:documentation>Get State Code,City,Area Code,Time Zone,Zip Code by Zip Code</wsdl:documentation>
+      <wsdl:input message="tns:GetInfoByZIPHttpPostIn"/>
+      <wsdl:output message="tns:GetInfoByZIPHttpPostOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfoByCity">
+      <wsdl:documentation>Get State Code,City,Area Code,Time Zone,Zip Code by City</wsdl:documentation>
+      <wsdl:input message="tns:GetInfoByCityHttpPostIn"/>
+      <wsdl:output message="tns:GetInfoByCityHttpPostOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfoByState">
+      <wsdl:documentation>Get State Code,City,Area Code,Time Zone,Zip Code by state</wsdl:documentation>
+      <wsdl:input message="tns:GetInfoByStateHttpPostIn"/>
+      <wsdl:output message="tns:GetInfoByStateHttpPostOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfoByAreaCode">
+      <wsdl:documentation>Get State Code,City,Area Code,Time Zone,Zip Code by Area Code</wsdl:documentation>
+      <wsdl:input message="tns:GetInfoByAreaCodeHttpPostIn"/>
+      <wsdl:output message="tns:GetInfoByAreaCodeHttpPostOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="USZipSoap" type="tns:USZipSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetInfoByZIP">
+      <soap:operation soapAction="http://www.webserviceX.NET/GetInfoByZIP" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfoByCity">
+      <soap:operation soapAction="http://www.webserviceX.NET/GetInfoByCity" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfoByState">
+      <soap:operation soapAction="http://www.webserviceX.NET/GetInfoByState" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfoByAreaCode">
+      <soap:operation soapAction="http://www.webserviceX.NET/GetInfoByAreaCode" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="USZipSoap12" type="tns:USZipSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetInfoByZIP">
+      <soap12:operation soapAction="http://www.webserviceX.NET/GetInfoByZIP" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfoByCity">
+      <soap12:operation soapAction="http://www.webserviceX.NET/GetInfoByCity" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfoByState">
+      <soap12:operation soapAction="http://www.webserviceX.NET/GetInfoByState" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfoByAreaCode">
+      <soap12:operation soapAction="http://www.webserviceX.NET/GetInfoByAreaCode" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="USZipHttpGet" type="tns:USZipHttpGet">
+    <http:binding verb="GET"/>
+    <wsdl:operation name="GetInfoByZIP">
+      <http:operation location="/GetInfoByZIP"/>
+      <wsdl:input>
+        <http:urlEncoded/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfoByCity">
+      <http:operation location="/GetInfoByCity"/>
+      <wsdl:input>
+        <http:urlEncoded/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfoByState">
+      <http:operation location="/GetInfoByState"/>
+      <wsdl:input>
+        <http:urlEncoded/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfoByAreaCode">
+      <http:operation location="/GetInfoByAreaCode"/>
+      <wsdl:input>
+        <http:urlEncoded/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="USZipHttpPost" type="tns:USZipHttpPost">
+    <http:binding verb="POST"/>
+    <wsdl:operation name="GetInfoByZIP">
+      <http:operation location="/GetInfoByZIP"/>
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfoByCity">
+      <http:operation location="/GetInfoByCity"/>
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfoByState">
+      <http:operation location="/GetInfoByState"/>
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfoByAreaCode">
+      <http:operation location="/GetInfoByAreaCode"/>
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="USZip">
+    <wsdl:port name="USZipSoap" binding="tns:USZipSoap">
+      <soap:address location="http://www.webservicex.net/uszip.asmx"/>
+    </wsdl:port>
+    <wsdl:port name="USZipSoap12" binding="tns:USZipSoap12">
+      <soap12:address location="http://www.webservicex.net/uszip.asmx"/>
+    </wsdl:port>
+    <wsdl:port name="USZipHttpGet" binding="tns:USZipHttpGet">
+      <http:address location="http://www.webservicex.net/uszip.asmx"/>
+    </wsdl:port>
+    <wsdl:port name="USZipHttpPost" binding="tns:USZipHttpPost">
+      <http:address location="http://www.webservicex.net/uszip.asmx"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://www.webservicex.net/uszip.asmx</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://www.webserviceX.NET/GetInfoByAreaCode" name="GetInfoByAreaCode" bindingOperationName="GetInfoByAreaCode" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://www.webservicex.net/uszip.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:web="http://www.webserviceX.NET">
+   <soap:Header/>
+   <soap:Body>
+      <web:GetInfoByAreaCode>
+         <!--Optional:-->
+         <web:USAreaCode>?</web:USAreaCode>
+      </web:GetInfoByAreaCode>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.webserviceX.NET/USZipSoap/GetInfoByAreaCodeRequest"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.webserviceX.NET/GetInfoByCity" name="GetInfoByCity" bindingOperationName="GetInfoByCity" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://www.webservicex.net/uszip.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:web="http://www.webserviceX.NET">
+   <soap:Header/>
+   <soap:Body>
+      <web:GetInfoByCity>
+         <!--Optional:-->
+         <web:USCity>?</web:USCity>
+      </web:GetInfoByCity>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.webserviceX.NET/USZipSoap/GetInfoByCityRequest"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.webserviceX.NET/GetInfoByState" name="GetInfoByState" bindingOperationName="GetInfoByState" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://www.webservicex.net/uszip.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:web="http://www.webserviceX.NET">
+   <soap:Header/>
+   <soap:Body>
+      <web:GetInfoByState>
+         <!--Optional:-->
+         <web:USState>?</web:USState>
+      </web:GetInfoByState>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.webserviceX.NET/USZipSoap/GetInfoByStateRequest"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.webserviceX.NET/GetInfoByZIP" name="GetInfoByZIP" bindingOperationName="GetInfoByZIP" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://www.webservicex.net/uszip.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:web="http://www.webserviceX.NET">
+   <soap:Header/>
+   <soap:Body>
+      <web:GetInfoByZIP>
+         <!--Optional:-->
+         <web:USZip>?</web:USZip>
+      </web:GetInfoByZIP>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.webserviceX.NET/USZipSoap/GetInfoByZIPRequest"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:sensitiveInformation/></con:soapui-project>
