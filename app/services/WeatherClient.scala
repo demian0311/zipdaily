@@ -32,6 +32,7 @@ class WeatherClient{//(getLatLongFromZipCodeClient: GetLatLongFromZipCodeClient 
     val extr="""latLonList&gt.*&lt;/latLonList&gt""".r
     extr.findFirstIn(response.body) match {
       case Some(str) => {
+        // yeah, this is ghetto
         val withoutLeft = str.drop(14)
         val withoutRight = withoutLeft.dropRight(19)
         Some(withoutRight)
@@ -62,8 +63,10 @@ class WeatherClient{//(getLatLongFromZipCodeClient: GetLatLongFromZipCodeClient 
       "SOAPAction" -> "http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl#NDFDgenByDayLatLonList"
     ).post(xmlContent.toString())
 
-    val response = Await.result(responseFuture, 10 seconds)
-    println("response.body: " + response.body)
+    val response = Await.result(responseFuture, 20 seconds)
+    println("response.status: " + response.status)
+    println("response.statusText: " + response.statusText)
+    println("response.body: \n\n***" + response.body)
     /*
     val extr="""latLonList&gt.*&lt;/latLonList&gt""".r
     extr.findFirstIn(response.body) match {

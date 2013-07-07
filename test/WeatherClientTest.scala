@@ -5,7 +5,7 @@ import org.junit.Assert._
 
 class WeatherClientTest extends {
 
-  @Ignore @Test
+  /*@Ignore @Test
   def getLatLongFromZipCode(){
     val weatherClient: WeatherClient = new WeatherClient()
     val result: Option[String] = weatherClient.getLatLongFromZipCode("61312")
@@ -16,10 +16,11 @@ class WeatherClientTest extends {
         fail("should get back a value")
       }
     }
-  }
+  }*/
 
   @Test
   def getWeatherFromLatLong(){
+    println("hello world")
     val weatherClient: WeatherClient = new WeatherClient()
     val result: Option[WeatherResult] = weatherClient.getWeatherFromLatLong("41.4712,-89.248")
     result match {
