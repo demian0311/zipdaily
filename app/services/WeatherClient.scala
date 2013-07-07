@@ -5,7 +5,11 @@ import scala.concurrent.Await
 import scala.concurrent.duration._
 import play.api.libs.ws.WS
 
-class WeatherClient {
+//trait GetLatLongFromZipCodeClient{
+//  def getLatLongFromZipCode(zipcode: String): Option[String]
+//}
+
+class WeatherClient{//(getLatLongFromZipCodeClient: GetLatLongFromZipCodeClient = this) extends GetLatLongFromZipCodeClient{
   val endpoint = "http://graphical.weather.gov/xml/SOAP_server/ndfdXMLserver.php"
 
   def getLatLongFromZipCode(zipcode: String): Option[String] = {
@@ -38,11 +42,47 @@ class WeatherClient {
     }
   }
 
-  def getWeatherForZipcode(zipcode: String): Option[WeatherResult] ={
+  def getWeatherFromLatLong(latLong: String): Option[WeatherResult] = {
+    val xmlContent = <soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ndf="http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl">
+      <soapenv:Header/>
+      <soapenv:Body>
+        <ndf:NDFDgenByDayLatLonList soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <listLatLon xsi:type="dwml:listLatLonType" xmlns:dwml="http://graphical.weather.gov/xml/DWMLgen/schema/DWML.xsd">30.2153,-92.0295</listLatLon>
+          <startDate xsi:type="xsd:date">2013-07-03</startDate>
+          <numDays xsi:type="xsd:integer">2</numDays>
+          <Unit xsi:type="dwml:unitType" xmlns:dwml="http://graphical.weather.gov/xml/DWMLgen/schema/DWML.xsd">e</Unit>
+          <format xsi:type="dwml:formatType" xmlns:dwml="http://graphical.weather.gov/xml/DWMLgen/schema/DWML.xsd">24 hourly</format>
+        </ndf:NDFDgenByDayLatLonList>
+      </soapenv:Body>
+    </soapenv:Envelope>
 
+
+    val responseFuture = WS.url(endpoint).withHeaders(
+      "Content-Type" -> "text/xml;charset=UTF-8",
+      "SOAPAction" -> "http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl#NDFDgenByDayLatLonList"
+    ).post(xmlContent.toString())
+
+    val response = Await.result(responseFuture, 10 seconds)
+    println("response.body: " + response.body)
+    /*
+    val extr="""latLonList&gt.*&lt;/latLonList&gt""".r
+    extr.findFirstIn(response.body) match {
+      case Some(str) => {
+        val withoutLeft = str.drop(14)
+        val withoutRight = withoutLeft.dropRight(19)
+        Some(withoutRight)
+      }
+      case None => {
+        None
+      }
+    }
+    */
+    None
+  }
+
+  def getWeatherForZipcode(zipcode: String): Option[WeatherResult] ={
     getLatLongFromZipCode(zipcode) match {
       case Some(latLong) => {
-        // now do o
         Some(WeatherResult(
           zipcode = zipcode,
           weatherDays = Nil
