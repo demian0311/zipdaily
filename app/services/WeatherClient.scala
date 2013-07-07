@@ -9,11 +9,7 @@ import org.joda.time.format.DateTimeFormat
 import scala.xml.XML
 import java.util.Date
 
-//trait GetLatLongFromZipCodeClient{
-//  def getLatLongFromZipCode(zipcode: String): Option[String]
-//}
-
-class WeatherClient{//(getLatLongFromZipCodeClient: GetLatLongFromZipCodeClient = this) extends GetLatLongFromZipCodeClient{
+class WeatherClient{
   val endpoint = "http://graphical.weather.gov/xml/SOAP_server/ndfdXMLserver.php"
 
   def getLatLongFromZipCode(zipcode: String): Option[String] = {
@@ -31,7 +27,7 @@ class WeatherClient{//(getLatLongFromZipCodeClient: GetLatLongFromZipCodeClient 
       "SOAPAction" -> "http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl#LatLonListZipCode"
     ).post(xmlContent.toString())
 
-    val response = Await.result(responseFuture, 10 seconds)
+    val response = Await.result(responseFuture, 30 seconds)
     println("response.body: " + response.body)
     val extr="""latLonList&gt.*&lt;/latLonList&gt""".r
     extr.findFirstIn(response.body) match {
