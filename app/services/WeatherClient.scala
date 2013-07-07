@@ -1,9 +1,13 @@
 package services
 
-import models.WeatherResult
+import models.{WeatherDay, WeatherResult}
 import scala.concurrent.Await
 import scala.concurrent.duration._
 import play.api.libs.ws.WS
+import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormat
+import scala.xml.XML
+import java.util.Date
 
 //trait GetLatLongFromZipCodeClient{
 //  def getLatLongFromZipCode(zipcode: String): Option[String]
@@ -43,58 +47,83 @@ class WeatherClient{//(getLatLongFromZipCodeClient: GetLatLongFromZipCodeClient 
     }
   }
 
-  def getWeatherFromLatLong(latLong: String): Option[WeatherResult] = {
-    val xmlContent = <soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ndf="http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl">
-      <soapenv:Header/>
-      <soapenv:Body>
-        <ndf:NDFDgenByDayLatLonList soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
-          <listLatLon xsi:type="dwml:listLatLonType" xmlns:dwml="http://graphical.weather.gov/xml/DWMLgen/schema/DWML.xsd">30.2153,-92.0295</listLatLon>
-          <startDate xsi:type="xsd:date">2013-07-03</startDate>
-          <numDays xsi:type="xsd:integer">2</numDays>
-          <Unit xsi:type="dwml:unitType" xmlns:dwml="http://graphical.weather.gov/xml/DWMLgen/schema/DWML.xsd">e</Unit>
-          <format xsi:type="dwml:formatType" xmlns:dwml="http://graphical.weather.gov/xml/DWMLgen/schema/DWML.xsd">24 hourly</format>
-        </ndf:NDFDgenByDayLatLonList>
-      </soapenv:Body>
-    </soapenv:Envelope>
+  def getWeatherFromLatLong(latLong: String): Option[List[WeatherDay]] = {
+    val fmt = DateTimeFormat.forPattern("YYYY-MM-dd")
+    val dateString = fmt.print(new DateTime().plusDays(1))
 
+    val xmlContent = <soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ndf="http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl">
+        <soapenv:Header/>
+        <soapenv:Body>
+          <ndf:NDFDgenByDayLatLonList soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+            <listLatLon xsi:type="dwml:listLatLonType" xmlns:dwml="http://graphical.weather.gov/xml/DWMLgen/schema/DWML.xsd">{latLong}</listLatLon>
+            <startDate xsi:type="xsd:date">{dateString}</startDate>
+            <numDays xsi:type="xsd:integer">2</numDays>
+            <Unit xsi:type="dwml:unitType" xmlns:dwml="http://graphical.weather.gov/xml/DWMLgen/schema/DWML.xsd">e</Unit>
+            <format xsi:type="dwml:formatType" xmlns:dwml="http://graphical.weather.gov/xml/DWMLgen/schema/DWML.xsd">24 hourly</format>
+          </ndf:NDFDgenByDayLatLonList>
+        </soapenv:Body>
+      </soapenv:Envelope>
 
     val responseFuture = WS.url(endpoint).withHeaders(
       "Content-Type" -> "text/xml;charset=UTF-8",
       "SOAPAction" -> "http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl#NDFDgenByDayLatLonList"
     ).post(xmlContent.toString())
 
-    val response = Await.result(responseFuture, 20 seconds)
-    println("response.status: " + response.status)
-    println("response.statusText: " + response.statusText)
-    println("response.body: \n\n***" + response.body)
-    /*
-    val extr="""latLonList&gt.*&lt;/latLonList&gt""".r
-    extr.findFirstIn(response.body) match {
-      case Some(str) => {
-        val withoutLeft = str.drop(14)
-        val withoutRight = withoutLeft.dropRight(19)
-        Some(withoutRight)
+    val response = Await.result(responseFuture, 30 seconds)
+    response.status match {
+      case 200 => {
+        val body = response.body
+        //println("body: \n\n***" + body)
+        // this is hairy, we have xml inside of a CDATA string
+        // we'll pull that out and then turn _that_ into xml
+        val withoutLeft = body.drop(504)
+        val withoutRight = withoutLeft.dropRight(88)
+        val xml = XML.loadString(withoutRight.replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&quot;", "\""))
+        println("xml: " + xml.toString())
+
+        val maxA: Int = ((xml \\ "temperature")(0) \\ "value")(0).text.toInt
+        val maxB: Int = ((xml \\ "temperature")(0) \\ "value")(1).text.toInt
+
+        val minA: Int = ((xml \\ "temperature")(1) \\ "value")(0).text.toInt
+        val minB: Int = ((xml \\ "temperature")(1) \\ "value")(1).text.toInt
+
+        // TODO: need to parse out the precip
+        val precipA1: Float = (xml \\ "probability-of-precipitation" \\ "value")(0).text.toFloat
+        val precipA2: Float = (xml \\ "probability-of-precipitation" \\ "value")(1).text.toFloat
+        val precipA = List(precipA1, precipA2).max
+
+        val precipB1: Float = (xml \\ "probability-of-precipitation" \\ "value")(2).text.toFloat
+        val precipB2: Float = (xml \\ "probability-of-precipitation" \\ "value")(3).text.toFloat
+        val precipB = List(precipB1, precipB2).max
+
+        val today = WeatherDay(
+          name="today",
+          date=new Date(), // TODO: fix
+          high=maxA,
+          low=minA,
+          chanceOfPrecipitation= precipA )
+
+        val tomorrow = WeatherDay(
+          name="tomorrow",
+          date=new Date(), // TODO: fix
+          high=maxB,
+          low=minB,
+          chanceOfPrecipitation=precipB )
+
+        Some(List(today, tomorrow))
       }
-      case None => {
+      case status => {
+        println("got a non-200 response code: " + status)
         None
       }
     }
-    */
-    None
   }
 
   def getWeatherForZipcode(zipcode: String): Option[WeatherResult] ={
-    getLatLongFromZipCode(zipcode) match {
-      case Some(latLong) => {
-        Some(WeatherResult(
-          zipcode = zipcode,
-          weatherDays = Nil
-        ))
-      }
-      case None => {
-        None
-      }
-    }
+    for{
+      latLong <- getLatLongFromZipCode(zipcode)
+      weatherDays <- getWeatherFromLatLong(latLong)
+    } yield WeatherResult(zipcode=zipcode, weatherDays=weatherDays)
   }
 }
 

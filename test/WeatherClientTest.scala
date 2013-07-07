@@ -1,4 +1,4 @@
-import models.WeatherResult
+import models.{WeatherDay, WeatherResult}
 import org.junit._
 import services.WeatherClient
 import org.junit.Assert._
@@ -18,11 +18,12 @@ class WeatherClientTest extends {
     }
   }*/
 
+  /*
   @Test
   def getWeatherFromLatLong(){
     println("hello world")
     val weatherClient: WeatherClient = new WeatherClient()
-    val result: Option[WeatherResult] = weatherClient.getWeatherFromLatLong("41.4712,-89.248")
+    val result: Option[List[WeatherDay]] = weatherClient.getWeatherFromLatLong("41.4712,-89.248")
     result match {
       case Some(value) => println("value: " + value)
       case None => {
@@ -30,14 +31,12 @@ class WeatherClientTest extends {
       }
     }
   }
+  */
 
-  /*
-  @Ignore @Test
+  @Test
   def getWeatherFromZipcode_None_with_badZip(){
-    //getLatLongFromZipCodeClient
-    //val weatherClient: WeatherClient = new WeatherClient(getLatLongFromZipCodeClient)
-    val result = weatherClient.getWeatherForZipcode("AAAAA")
+    val weatherClient: WeatherClient = new WeatherClient()
+    val result = weatherClient.getWeatherForZipcode("61312")
     println("result " + result)
   }
-  */
 }
