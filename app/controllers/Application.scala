@@ -7,7 +7,8 @@ object Application extends Controller {
   val weatherClient = new WeatherClient()
 
   def index = Action {
-    Redirect(routes.Application.daily("90210"))
+    //Redirect(routes.Application.daily("90210"))
+    Ok("add a zipcode to the URL")
   }
 
   def daily(zip: String) = Action {

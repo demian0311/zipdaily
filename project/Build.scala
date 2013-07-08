@@ -9,9 +9,17 @@ object ApplicationBuild extends Build {
 
   val appDependencies = Seq(
     // Add your project dependencies here,
-    jdbc,
-    anorm
+    //jdbc,
+    //anorm,
+    "com.dadrox" % "scuttle_2.10" % "0.3"
   )
+  /*
+  <dependency>
+  <groupId>com.dadrox</groupId>
+  <artifactId>scuttle_2.10</artifactId>
+  <version>0.3</version>
+</dependency>
+   */
 
 
   val main = play.Project(appName, appVersion, appDependencies).settings(
