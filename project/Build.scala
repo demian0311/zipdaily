@@ -11,16 +11,24 @@ object ApplicationBuild extends Build {
     // Add your project dependencies here,
     //jdbc,
     //anorm,
-    "com.dadrox" % "scuttle_2.10" % "0.3"
-  )
-  /*
-  <dependency>
-  <groupId>com.dadrox</groupId>
-  <artifactId>scuttle_2.10</artifactId>
-  <version>0.3</version>
-</dependency>
-   */
+    //"com.dadrox" % "scuttle_2.10" % "0.3"
+    "com.codahale.metrics" % "metrics-core" % "3.0.1"
 
+    //"com.yammer.metrics" % "metrics-core" % "2.2.0",
+    //"nl.grons" %% "metrics-scala" % "2.2.0",
+    //"com.github.sdb" %% "play2-metrics" % "0.1.0"
+  )
+
+
+  /*
+  <dependencies>
+    <dependency>
+        <groupId>com.codahale.metrics</groupId>
+        <artifactId>metrics-core</artifactId>
+        <version>3.0.1</version>
+    </dependency>
+</dependencies>
+   */
 
   val main = play.Project(appName, appVersion, appDependencies).settings(
     // Add your own project settings here      

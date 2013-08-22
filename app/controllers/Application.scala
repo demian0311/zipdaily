@@ -1,10 +1,29 @@
 package controllers
 
 import play.api.mvc._
+import com.codahale.metrics._
 import services.WeatherClient
+import java.util.concurrent.TimeUnit
 
 object Application extends Controller {
-  val weatherClient = new WeatherClient()
+  // create the metrics registry
+  val metricRegistry = new MetricRegistry()
+
+  val consoleReporter: ConsoleReporter = ConsoleReporter
+    .forRegistry(metricRegistry)
+    .convertRatesTo(TimeUnit.SECONDS)
+    .convertDurationsTo(TimeUnit.MILLISECONDS)
+    .build()
+  consoleReporter.start(1, TimeUnit.MINUTES)
+
+  val jmxReporter: JmxReporter = JmxReporter
+    .forRegistry(metricRegistry)
+    .convertRatesTo(TimeUnit.SECONDS)
+    .convertDurationsTo(TimeUnit.MILLISECONDS)
+    .build()
+  jmxReporter.start()
+
+  val weatherClient = new WeatherClient(metricRegistry)
 
   def index = Action {
     //Redirect(routes.Application.daily("90210"))

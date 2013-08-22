@@ -1,6 +1,7 @@
 package services
 
 import models.{WeatherDay, WeatherResult}
+
 import scala.concurrent.Await
 import scala.concurrent.duration._
 import play.api.libs.ws.WS
@@ -8,9 +9,12 @@ import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import scala.xml.XML
 import java.util.Date
+import com.codahale.metrics._
 
-class WeatherClient{
+class WeatherClient(metricRegistry: MetricRegistry){
+
   val endpoint = "http://graphical.weather.gov/xml/SOAP_server/ndfdXMLserver.php"
+  val getLatLongFromZipCodeTimer = metricRegistry.timer("services.WeatherClient.getLatLongFromZipCode")
 
   def getLatLongFromZipCode(zipcode: String): Option[String] = {
     val xmlContent = <soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ndf="http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl">
@@ -22,12 +26,14 @@ class WeatherClient{
       </soapenv:Body>
     </soapenv:Envelope>
 
+    val timerContext: Timer.Context = getLatLongFromZipCodeTimer.time()
     val responseFuture = WS.url(endpoint).withHeaders(
       "Content-Type" -> "text/xml;charset=UTF-8",
       "SOAPAction" -> "http://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl#LatLonListZipCode"
     ).post(xmlContent.toString())
-
     val response = Await.result(responseFuture, 30 seconds)
+    timerContext.stop()
+
     println("response.body: " + response.body)
     val extr="""latLonList&gt.*&lt;/latLonList&gt""".r
     extr.findFirstIn(response.body) match {
